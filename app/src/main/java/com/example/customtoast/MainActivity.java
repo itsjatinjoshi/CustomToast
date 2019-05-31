@@ -1,0 +1,47 @@
+package com.example.customtoast;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+
+    Button btnToast;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+
+        btnToast= (Button)findViewById(R.id.btnToast);
+
+        btnToast.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Applies changes", Toast.LENGTH_LONG).show();
+
+                showToast("Data Successfully Saved!");
+
+            }
+        });
+    }
+
+    public void showToast(String message)
+    {
+      View toastView =getLayoutInflater().inflate(R.layout.chrome, (ViewGroup) findViewById(R.id.LinLay));
+        TextView tvToast = (TextView) toastView.findViewById(R.id.tvToast);
+        tvToast.setText(message);
+
+        Toast toast = new Toast(MainActivity.this);
+        toast.setDuration(Toast.LENGTH_LONG);
+        toast.setView(toastView);
+        toast.setGravity(Gravity.BOTTOM| Gravity.HORIZONTAL_GRAVITY_MASK,0,0);
+        toast.show();
+    }
+}
